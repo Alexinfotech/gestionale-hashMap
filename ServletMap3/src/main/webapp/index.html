@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Index Page</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			display: flex;
+			flex-direction: column;
+			min-height: 100vh;
+		}
+
+		header,
+		footer {
+			background-color: #f1f1f1;
+			padding: 10px;
+			text-align: center;
+		}
+
+		.container {
+			display: flex;
+			flex: 1;
+		}
+
+		.menu {
+			width: 200px;
+			background-color: #f3f3f3;
+			padding: 15px;
+		}
+
+		.menu ul {
+			list-style-type: none;
+			padding: 0;
+		}
+
+		.menu ul li {
+			padding: 8px;
+			margin-bottom: 5px;
+			background-color: #ddd;
+			cursor: pointer;
+		}
+
+		.menu ul li:hover {
+			background-color: #ccc;
+		}
+
+		.main-content {
+			flex-grow: 1;
+			padding: 15px;
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<h1>Benvenuti nella Pagina di Gestione Utenti</h1>
+	</header>
+	<div class="container">
+		<div class="menu">
+			<ul>
+				<li onclick="showFormUtente()">Inserisci Utente</li>
+					<li onclick="showFormStudente()">Inserisci Studente</li>
+					<li onclick="showFormProfessore()">Inserisci Proffessore</li>
+				<li onclick="showUsers()">Elenco Utenti</li>
+				<li onclick="showUsersModifica()">Modifica</li>
+				<li onclick="showUsersElimina()">Elimina</li>
+				
+			</ul>
+		</div>
+		<div class="main-content" id="main-content">
+			<!-- Il contenuto cambierà in base all'interazione dell'utente -->
+		</div>
+	</div>
+	<footer>
+		<p>Footer</p>
+	</footer>
+
+	<script>
+		function showFormUtente() {
+			// Crea un nuovo oggetto XMLHttpRequest per effettuare richieste HTTP.
+			var xhr = new XMLHttpRequest();
+
+			// Definisce cosa fare quando lo stato della richiesta cambia.
+			xhr.onreadystatechange = function () {
+				// Controlla se la richiesta è completa (readyState == 4) e ha avuto successo (status == 200).
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					// Aggiorna l'HTML dell'elemento con id "main-content" con la risposta della richiesta.
+					document.getElementById("main-content").innerHTML = xhr.responseText;
+				}
+			};
+			// Configura la richiesta HTTP come GET verso l'URL "UtenteServlet?id=". 
+			// true indica che la richiesta è asincrona.
+			xhr.open("GET", "Utenti?id=UTENTE", true);
+			// Invia la richiesta al server.
+			xhr.send();
+		}
+	
+		function showFormProfessore() {
+			// Crea un nuovo oggetto XMLHttpRequest per effettuare richieste HTTP.
+			var xhr = new XMLHttpRequest();
+
+			// Definisce cosa fare quando lo stato della richiesta cambia.
+			xhr.onreadystatechange = function () {
+				// Controlla se la richiesta è completa (readyState == 4) e ha avuto successo (status == 200).
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					// Aggiorna l'HTML dell'elemento con id "main-content" con la risposta della richiesta.
+					document.getElementById("main-content").innerHTML = xhr.responseText;
+				}
+			};
+			// Configura la richiesta HTTP come GET verso l'URL "UtenteServlet?id=". 
+			// true indica che la richiesta è asincrona.
+			xhr.open("GET", "Utenti?id=PROFESSORE", true);
+			// Invia la richiesta al server.
+			xhr.send();
+		}
+		function showFormStudente() {
+			// Crea un nuovo oggetto XMLHttpRequest per effettuare richieste HTTP.
+			var xhr = new XMLHttpRequest();
+
+			// Definisce cosa fare quando lo stato della richiesta cambia.
+			xhr.onreadystatechange = function () {
+				// Controlla se la richiesta è completa (readyState == 4) e ha avuto successo (status == 200).
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					// Aggiorna l'HTML dell'elemento con id "main-content" con la risposta della richiesta.
+					document.getElementById("main-content").innerHTML = xhr.responseText;
+				}
+			};
+			// Configura la richiesta HTTP come GET verso l'URL "UtenteServlet?id=". 
+			// true indica che la richiesta è asincrona.
+			xhr.open("GET", "Utenti?id=STUDENTE", true);
+			// Invia la richiesta al server.
+			xhr.send();
+		}
+
+function showUsers() {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            document.getElementById("main-content").innerHTML = xhr.responseText;
+            
+            // Aggiorna il footer
+            document.getElementById("footer").innerHTML = "Questo è il footer per la pagina di Elenco Utenti.";
+        }
+    };
+    xhr.open("GET", "Utenti?id=utenti", true);
+    xhr.send();
+}
+
+		function showUsersModifica() {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            document.getElementById("main-content").innerHTML = xhr.responseText;
+        }
+    };
+    xhr.open("GET", "Utenti?id=ID", true); // Assicurati che l'ID sia corretto
+   
+    xhr.send();
+}
+		function showUsersElimina() {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            document.getElementById("main-content").innerHTML = xhr.responseText;
+        }
+    };
+    xhr.open("GET", "Utenti?id=IDID", true); // Assicurati che l'ID sia corretto
+   
+    xhr.send();
+}
+
+
+	</script>
+</body>
+
+</html>
